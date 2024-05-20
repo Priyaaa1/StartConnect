@@ -57,3 +57,8 @@ p a:hover {
   color: #0056b3;
   text-decoration: underline;
 }
+.sign-hover:hover{
+  all:unset;
+  cursor: pointer;
+color: rgb(59, 59, 59);
+}

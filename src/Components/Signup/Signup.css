@@ -51,3 +51,9 @@ NavLink:hover {
   text-decoration: underline;
   color: #0056b3;
 }
+
+.sign-hover:hover{
+  all:unset;
+  cursor: pointer;
+color: rgb(59, 59, 59);
+}
