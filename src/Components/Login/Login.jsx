@@ -10,27 +10,24 @@ import { jwtDecode } from "jwt-decode";
 
 const Login = () => {
 	const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [warnings, setWarnings] = useState({ email: '', password: '' });
-	const navigate = useNavigate()
-    const handleLogin = () => {
-        let emailWarning = '';
-        let passwordWarning = '';
-        if (!email) {
-            emailWarning = '*Please enter your email';
-        }
+	const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-        if (!password) {
-            passwordWarning = '*Please enter your password';
-        }
+    const hashPassword = async(password) =>{
+        return password.split('').reverse().join('');
+    }
 
-        setWarnings({ email: emailWarning, password: passwordWarning });
-        if (email && password) {
-            console.log("Logging in with email:", email, "and password:", password);
-			navigate('/explore')
+	const handleLogin = () => {
+        try{
+            const HashedPassword = hashPassword(password)
+        } catch(error){
+            console.log("login failed: ",error)
+            setErrorMessage("Invalid email or password")
         }
-    };
-	
+		// console.log("Logging in with email:", email, "and password:", password);
+	};
+
+
 	return (
 		<div className="login-outerContainer">
 			<div className="login-container">
@@ -42,16 +39,16 @@ const Login = () => {
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
-				{warnings.email && <p style={{ color: 'red' }} className="warningmsg">{warnings.email}</p>}
 				<input
 					type="password"
 					placeholder="Password"
 					value={password}
 					onChange={(e) => setPassword(e.target.value)}
 				/>
-		        {warnings.password && <p style={{ color: 'red'}} className="warningmsg">{warnings.password}</p>}
 				</div>
-				<button onClick={handleLogin}>Login</button>
+				<NavLink to="/explore"><button onClick={handleLogin}>Login</button>
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                </NavLink>
 				<p>
 					Don't have an account? <NavLink to="/signup">Sign up</NavLink>
 				</p>
