@@ -138,7 +138,11 @@ const Navbar = () => {
         </li>
         <li>
           <NavLink to="/login">
+
+          <button >LOG IN</button>
+
             <button className='logIn'>LOG IN</button>
+
           </NavLink>
         </li>
         <li>
